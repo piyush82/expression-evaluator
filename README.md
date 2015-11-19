@@ -48,7 +48,9 @@ LT(add(vnfs[1].memory-consumption, vnfs[2].memory-consumption, 100))
 # currently supported API
 The expression evaluator currently only supports stateless evaluations, but this will change in future where expressions can be registered with the service, and later invoked with full or partial parameter list.
 
-* ip-address:port/exp-eval/otfly [POST] - example
+In any API call, ```Content-Type``` header field must be provided. Currently supported type is ```application/json```.
+
+## ip-address:port/exp-eval/otfly/ [POST] - example
 
 ```curl -X POST http://localhost:8000/exp-eval/otfly/ --header "Content-Type:application/json" -d '{"exp":"GT(min(vnfd[0].availability, vnfd[1].availability))", "values":["200.1", "109.58"], "threshold":"95"}'```
 
@@ -70,6 +72,22 @@ If expression evaluation fails due to malformed expression or missing parameter 
   "status": "execution failed"
 }
 </pre>
+
+## ip-address:port/kpi [GET]
+This API call allows one to get some of the system counters. Currently, this call also resets the counters. But this will change very soon. The response body exaple is below.
+<pre>
+{
+ "msg": "kpi parameters data",
+ "data-since": "2015-11-05 17:38:18 GMT+01:00",
+ "src": "t-nova expression evaluation service",
+ "api-calls-failed": 0,
+ "expressions-under-evaluation": 0,
+ "api-calls-total": 5,
+ "api-calls-success": 5,
+ "expressions-evaluated": 0
+}
+</pre>
+
 
 # need more info or want to contribute
 Please contact me at ```piyush DOT harsh AT zhaw DOT ch```.

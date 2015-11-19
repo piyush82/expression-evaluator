@@ -33,13 +33,8 @@ sudo apt-get -y remove maven2
 sudo apt-get -y install maven
 sudo apt-get -y install git
 
-### Getting the code from stash repository ###
-mkdir exp-eval && cd exp-eval
-git init
-git remote add origin http://<your-stash-user>:<yourstash-pass>@stash.i2cat.net/scm/TNOV/wp3.git
-git config core.sparsecheckout true
-echo WP3/orchestrator_expression-evaluator/ >> .git/info/sparse-checkout
-git pull origin master
+### Getting the code from github ###
+git clone https://github.com/piyush82/expression-evaluator.git
 
 ### Building the package dependencies into single jar ###
 sudo mkdir -p /var/log/tnova/expeval/
@@ -50,7 +45,7 @@ echo "| suggested path: /var/log/tnova/expeval/ followed by <filename>"
 echo "| line to modify is: log4j.appender.file.File"
 echo "----------------------------------------------------------"
 read -p "Press any key to modify the logger settings."
-cd ./WP3/orchestrator_expression-evaluator/
+cd ./expression-evaluator/
 nano src/main/resources/log4j.properties
 echo "--------------------------IMP MSG-------------------------"
 echo "| Change DB file path in the program's configuration"

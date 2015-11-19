@@ -2,7 +2,7 @@
 A micro-service to enable on the fly expression evaluation.
 
 # motivation
-ETSI has specified the guidelines for virtual network function (VNF) descriptors and network service (NS) descriptors. These descriptors can be extended to contain assurance expressions and minitoring paramaters for constitutent VNFs of the NS. For NS orchestration, especially if the orchestrator design is influenced by micro-services design pattern, a small service that quickly evaluates these ETSI compliant VNF assurance expressions can be handy.
+ETSI has specified the guidelines for virtual network function (VNF) descriptors and network service (NS) descriptors. These descriptors can be extended to contain assurance expressions and monitoring paramaters for constitutent VNFs of the NS. For NS orchestration, especially if the orchestrator design is influenced by micro-services design pattern, a small service that quickly evaluates these ETSI compliant VNF assurance expressions can be handy.
 
 # supported expressions
 This micro-service provides a REST API for on-the-fly expression evaluation, the expression must be a well formed functional composition. You can think of it as synonimous to a prefix expression. Parameters and constants are allowed, and the parameters values to be used in the expression must be supplied with the API call for evaluation.
@@ -28,3 +28,12 @@ LT(add(vnfs[1].memory-consumption, vnfs[2].memory-consumption, 100))
 5. ```lt()``` - true if the argument is less than a threshold - threshold value is provided separately
 6. ```gt()``` - true if the argument is greater than a threshold - threshold value is provided sepaately
 
+# installation requirements
+* Java runtime environemt (7.0 or higher)
+* maven 3.0 or higher
+
+# one-step installation steps (ubuntu or debian system)
+* download the setup script - https://raw.githubusercontent.com/piyush82/expression-evaluator/master/setup.sh
+* make the script executable - ```chmod +x setup.sh```
+* execute the script - ```./setup.sh```
+* follow the prompts and you are done.

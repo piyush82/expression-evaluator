@@ -36,4 +36,41 @@ LT(add(vnfs[1].memory-consumption, vnfs[2].memory-consumption, 100))
 * download the setup script - https://raw.githubusercontent.com/piyush82/expression-evaluator/master/setup.sh
 * make the script executable - ```chmod +x setup.sh```
 * execute the script - ```./setup.sh```
-* follow the prompts and you are done.
+* follow the prompts and you are done. You will be prompted to provide certain inputs during the script execution. See configuration parameters section below.
+
+# configuration parameters
+* log file location - when prompted do provide the full path of the log file in the log4j configuration file. The field to be modified is ```log4j.appender.file.File```.
+* database file location - when prompted, provide the full path of the sqlite database file, the field in expressionsolver.conf file is ```dbfile```.
+* ```showexceptions``` - if set to true, the exceptions stack trace will be dumped otherwise exceptions will be supressed.
+* ```port``` - the port number where the service will be running.
+* ```dbengine``` - currently only sqlite is supported, in future other backends will be supported.
+
+# currently supported API
+The expression evaluator currently only supports stateless evaluations, but this will change in future where expressions can be registered with the service, and later invoked with full or partial parameter list.
+
+* ip-address:port/exp-eval/otfly [POST] - example
+
+```curl -X POST http://localhost:8000/exp-eval/otfly/ --header "Content-Type:application/json" -d '{"exp":"GT(min(vnfd[0].availability, vnfd[1].availability))", "values":["200.1", "109.58"], "threshold":"95"}'```
+
+The parameter values are provided as a JSON array. Keep in mind even numbers are passed as string in the array.
+
+Sample response if all goes as planned (HTTP Status Code: 200)- 
+<pre>
+{
+    "result": "true",
+    "info": "t-nova expression evaluation service",
+    "status": "ok"
+}
+</pre>
+If expression evaluation fails due to malformed expression or missing parameter value, the response will look like (with HTTP Status Code: 400) -
+<pre>
+{
+  "msg": "malformed request parameters, check your expression or parameter list for correctness.",
+  "info": "t-nova expression evaluation service",
+  "status": "execution failed"
+}
+</pre>
+
+# need more info or want to contribute
+Please contact me at ```piyush DOT harsh AT zhaw DOT ch```.
+

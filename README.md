@@ -92,3 +92,4 @@ This API call allows one to get some of the system counters. Currently, this cal
 # need more info or want to contribute
 Please contact me at ```piyush DOT harsh AT zhaw DOT ch```.
 
+[![DOI](https://zenodo.org/badge/46425230.svg)](https://zenodo.org/badge/latestdoi/46425230)
